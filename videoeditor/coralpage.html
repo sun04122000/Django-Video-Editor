@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>video editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet"> 
+<link rel="icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/multimedia-flat-colorful-long-shadow/614/1393_-_Video_Camera_I-512.png">
+<style>
+.header img{
+width:10%;
+height:10%;
+float:left;
+
+border-style:solid;
+}
+
+.header p{
+padding-top:2px;
+font-size:45px;
+font-family:'playball',cursive;
+}
+.header{
+padding-left:40%;
+margin-top:15px;
+}
+.tools{
+float:left;
+}
+.tools a{
+background-color:black;
+color:white;
+padding: 5px 5px 5px 5px;
+text-decoration:none;
+}
+.tools a:hover{
+color:black;
+background-color:white;
+padding: 5px 5px 5px 5px;
+text-decoration:none;
+}
+
+.dropdown{
+ height:0px;
+ width:180px;
+ transition:0.5s;
+z-index:1px;
+ left: 0px;
+ overflow-y: hidden;
+ background-color:black;
+ color:#bfbfbf;
+ margin-left:0px;
+ margin-top:80px;
+ float:left;
+ position:fixed;
+ }
+ .dropdown2{
+ height:0px;
+ width:180px;
+ transition:0.5s;
+z-index:1px;
+ left: 0px;
+ overflow-y: hidden;
+ background-color:black;
+ color:#bfbfbf;
+ margin-left:95px;
+ margin-top:80px;
+ float:left;
+ position:fixed;
+ }
+ 
+ .dropdown3{
+ height:0px;
+ width:180px;
+ transition:0.5s;
+z-index:1px;
+ left: 0px;
+ overflow-y: hidden;
+ background-color:black;
+ color:#bfbfbf;
+ margin-left:95px;
+ margin-top:160px;
+ float:left;
+ position:fixed;
+ }
+ 
+ .dropdown4{
+ height:0px;
+ width:180px;
+ transition:0.5s;
+z-index:1px;
+ left: 0px;
+ overflow-y: hidden;
+ background-color:black;
+ color:#bfbfbf;
+ margin-left:110px;
+ margin-top:160px;
+ float:left;
+ position:fixed;
+ }
+ .dropdown5{
+ height:0px;
+ width:180px;
+ transition:0.5s;
+z-index:1px;
+ left: 0px;
+ overflow-y: hidden;
+ background-color:black;
+ color:#bfbfbf;
+ margin-left:95px;
+ margin-top:190px;
+ float:left;
+ position:fixed;
+ }
+ .dropdown6{
+ height:0px;
+ width:180px;
+ transition:0.5s;
+z-index:1px;
+ left: 0px;
+ overflow-y: hidden;
+ background-color:black;
+ color:#bfbfbf;
+ margin-left:110px;
+ margin-top:190px;
+ float:left;
+ position:fixed;
+ }
+body{
+background-color:#B1E6B1;
+background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-v2.png");
+border-style:groove;
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+<img src="https://i.pinimg.com/originals/0c/cd/96/0ccd96bc52dc46b1f5f3ea89cad58ecb.gif">
+<p>CoralCut</p>
+</div>
+<div class="tools">
+<br><a href="/black/">black&white&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Mirror_x/">Mirror-x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;<br><br>
+<a href="/paint/">painting&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Mirror_y/">Mirror-y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;<br><br>
+<a href="#" onclick="opendropdown()">fadein&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="opendropdown2()">fadeout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><br><br>
+<a href="/timesymmetry/">time_symmetrize</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/invertcolors/">invert_colors&nbsp;&nbsp;&nbsp;</a><br><br>
+<a href="/lumcontrast/">lum_contrast&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/timemirror/">time_mirror&nbsp;&nbsp;&nbsp;&nbsp;</a><br><br>
+<a href="#" onclick="opendropdown3()">speed_factor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="opendropdown4()">volume&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><br><br>
+<a href="#" onclick="opendropdown6()">gamma correction</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="opendropdown5()">rotate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><br><br>
+<a href="/evensize/">even size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+</div>
+<br><br>
+<div class="dropdown" id="mydropdown">
+<a href="javascript:void(0)" class="closebtn" onclick="closedropdown()">&times;</a>
+<form method="POST" action="/fadein/">{% csrf_token %}<br>
+<label for="water">⏲select duration for fade_in</label>
+<input type="range" min="0" max="{{maxrange}}" id="water" name="duration">
+Value:<span id="demo"></span><br><br>
+<label for="sleep">🎨select color range</label><br>
+<input type="range" min="0" max="1" id="sleep" step="0.1" name="color"><br>
+Value:<span id="demo2"></span><br><br>
+<input type="submit" value="submit">
+</form>
+</div>
+<div class="dropdown2" id="mydropdown2">
+<a href="javascript:void(0)" class="closebtn" onclick="closedropdown2()">&times;</a>
+<form method="POST" action="/fadeout/">{% csrf_token %}<br>
+<label for="water2">⏲select duration for fade_out</label>
+<input type="range" min="0" max="{{maxrange2}}" id="water2" name="duration2">
+Value:<span id="demo3"></span><br><br>
+<label for="sleep2">🎨select color range</label><br>
+<input type="range" min="0" max="1" id="sleep2" step="0.1" name="color2"><br>
+Value:<span id="demo4"></span><br><br>
+<input type="submit" value="submit">
+</form>
+</div>
+
+<div class="dropdown3" id="mydropdown3">
+<a href="javascript:void(0)" class="closebtn" onclick="closedropdown3()">&times;</a>
+<form method="POST" action="/speed/">{% csrf_token %}<br>
+<label for="water3">Write the speed factor</label>
+<input type="text" id="water3" name="factor"><br>
+<input type="submit" value="submit">
+</form>
+</div>
+
+<div class="dropdown4" id="mydropdown4">
+<a href="javascript:void(0)" class="closebtn" onclick="closedropdown4()">&times;</a>
+<form method="POST" action="/volume/">{% csrf_token %}<br>
+<label for="water4">Write the volume factor</label>
+<input type="text" id="water4" name="volfactor"><br>
+<input type="submit" value="submit">
+</form>
+</div>
+<div class="dropdown5" id="mydropdown5">
+<a href="javascript:void(0)" class="closebtn" onclick="closedropdown5()">&times;</a>
+<form method="POST" action="/rotate/">{% csrf_token %}<br>
+<label for="water5">Write the angle of rotation in degree</label>
+<input type="text" id="water5" name="degree"><br>
+<input type="submit" value="submit">
+</form>
+</div>
+<div class="dropdown6" id="mydropdown6">
+<a href="javascript:void(0)" class="closebtn" onclick="closedropdown6()">&times;</a>
+<form method="POST" action="/gammac/">{% csrf_token %}<br>
+<label for="water6">gamma correction</label>
+<input type="text" id="water6" name="gamma"><br>
+<input type="submit" value="submit">
+</form>
+</div>
+<div class="iframe">
+{% load static %}
+<iframe src="{% static vname %}" height="400px" width="800px"></iframe>
+</div>
+<br><br>
+<script>
+var slider=document.getElementById("water");
+var output=document.getElementById("demo");
+output.innerHTML=slider.value;
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script>
+<script>
+var slider2=document.getElementById("sleep");
+var output2=document.getElementById("demo2");
+output2.innerHTML=slider2.value;
+slider2.oninput = function() {
+  output2.innerHTML = this.value;
+}
+</script>
+<script>
+function opendropdown() {
+document.getElementById("mydropdown").style.height="350px";
+}
+function closedropdown() {
+document.getElementById("mydropdown").style.height="0px";
+}
+</script>
+<script>
+var slider3=document.getElementById("water2");
+var output3=document.getElementById("demo3");
+output3.innerHTML=slider3.value;
+slider3.oninput = function() {
+  output3.innerHTML = this.value;
+}
+</script>
+<script>
+var slider4=document.getElementById("sleep2");
+var output4=document.getElementById("demo4");
+output4.innerHTML=slider4.value;
+slider4.oninput = function() {
+  output4.innerHTML = this.value;
+}
+</script>
+<script>
+function opendropdown2() {
+document.getElementById("mydropdown2").style.height="350px";
+}
+function closedropdown2() {
+document.getElementById("mydropdown2").style.height="0px";
+}
+</script>
+<script>
+function opendropdown3() {
+document.getElementById("mydropdown3").style.height="350px";
+}
+function closedropdown3() {
+document.getElementById("mydropdown3").style.height="0px";
+}
+</script>
+<script>
+function opendropdown4() {
+document.getElementById("mydropdown4").style.height="350px";
+}
+function closedropdown4() {
+document.getElementById("mydropdown4").style.height="0px";
+}
+</script>
+<script>
+function opendropdown5() {
+document.getElementById("mydropdown5").style.height="350px";
+}
+function closedropdown5() {
+document.getElementById("mydropdown5").style.height="0px";
+}
+</script>
+<script>
+function opendropdown6() {
+document.getElementById("mydropdown6").style.height="350px";
+}
+function closedropdown6() {
+document.getElementById("mydropdown6").style.height="0px";
+}
+</script>
+<div class="file">
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+<input type="file" name="video" multiple><br>
+<input type="submit" value="upload">
+</form>
+</div>
+</body>
+</html>
